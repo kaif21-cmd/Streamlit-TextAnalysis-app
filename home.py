@@ -7,7 +7,7 @@ from utils import SentimentAnalysis, SpellingCorrection, PartsOfSpeechTagging, T
 from sample_text import text_input, what_is_nlp
 
 subprocess.run(['python', '-m', 'textblob.download_corpora'])
-subprocess.run(["nltk.download('punkt')"])
+subprocess.run(['python', '-m', "nltk.download('punkt')"])
 
 
 st.title('📝 Natural language processing')
