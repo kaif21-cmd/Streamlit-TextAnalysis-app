@@ -1,9 +1,12 @@
 import streamlit as st
 import altair as alt
 
-import download_corpora
 from utils import SentimentAnalysis, SpellingCorrection, PartsOfSpeechTagging, TextSummarize
 from sample_text import text_input, what_is_nlp
+
+import subprocess
+import sys
+subprocess.run([f"{sys.executable}", "download_corpora.py"])
 
 
 
