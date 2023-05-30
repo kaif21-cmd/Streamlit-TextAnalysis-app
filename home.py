@@ -1,13 +1,11 @@
 import streamlit as st
 import altair as alt
-import nltk
-import subprocess
 
+import download_corpora
 from utils import SentimentAnalysis, SpellingCorrection, PartsOfSpeechTagging, TextSummarize
 from sample_text import text_input, what_is_nlp
 
-subprocess.run(['python', '-m', 'textblob.download_corpora'])
-subprocess.run(['python', '-m', "nltk.download('punkt')"])
+
 
 
 st.title('📝 Natural language processing')
