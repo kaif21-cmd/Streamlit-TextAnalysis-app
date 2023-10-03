@@ -5,6 +5,7 @@ import pandas as pd
 import pathlib
 import matplotlib.pyplot as plt
 
+
 import nltk
 from nltk.corpus import stopwords
 
@@ -17,9 +18,13 @@ from collections import defaultdict
 from itertools import compress
 from dataclasses import dataclass
 
-# downloads
-nltk.download('stopwords')
+
+
+
+import nltk
 nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
 
 
@@ -64,6 +69,7 @@ class SentimentAnalysis:
         selected_words = set(word_count.keys()) - set(self.english_stopwords)
         data = {k: v for k, v in word_count.items() if k in selected_words}
         return pd.DataFrame(data={'words': data.keys(), 'count': data.values()})
+
 
 
 class SpellingCorrection:
