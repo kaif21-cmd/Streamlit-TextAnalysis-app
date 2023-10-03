@@ -110,7 +110,8 @@ with tab3:
 with tab4:
     st.header("Text Summarization")
     text_to_summarize = st.text_area(
-        label="Enter the text you want to summarize", value=what_is_nlp.strip())
+        label="Enter the text you want to summarize", value=what_is_nlp.strip(), height=200
+    )
     if text_to_summarize:
         summarizer = TextSummarize(text=text_to_summarize)
         num = st.number_input(
