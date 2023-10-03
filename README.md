@@ -7,4 +7,4 @@ NLP combines computational linguistics—rule-based modeling of human language�
 
 NLP drives computer programs that translate text from one language to another, respond to spoken commands, and summarize large volumes of text rapidly—even in real time. There’s a good chance you’ve interacted with NLP in the form of voice-operated GPS systems, digital assistants, speech-to-text dictation software, customer service chatbots, and other consumer conveniences. But NLP also plays a growing role in enterprise solutions that help streamline business operations, increase employee productivity, and simplify mission-critical business processes.
 
-This repp provides a simple APP for diving into common natural language processing (NLP) tasks such as part-of-speech tagging, sentiment analysis, and text-summarization.
+This repo provides a simple APP for diving into common natural language processing (NLP) tasks such as part-of-speech tagging, sentiment analysis, and text-summarization.
