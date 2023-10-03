@@ -6,7 +6,9 @@ import pathlib
 import matplotlib.pyplot as plt
 
 
+import nltk
 from nltk.corpus import stopwords
+
 from textblob import Word, WordList, Sentence
 from textblob import TextBlob
 from redlines import Redlines
@@ -15,6 +17,8 @@ from heapq import nlargest
 from collections import defaultdict
 from itertools import compress
 from dataclasses import dataclass
+
+
 
 
 import nltk
@@ -34,9 +38,10 @@ class SentimentAnalysis:
     def __init__(self, text: str):
         self.text: str = text
         self.blob = TextBlob(text)
+        self.english_stopwords: list = stopwords.words('english')
 
-    def get_mood(self, threshold: float = 0.3) -> Mood:
-        sentiment: float = self.blob.sentiment.polarity
+    def get_mood(self, threshold: float = 0.3, sentence: str = None) -> Mood:
+        sentiment: float = self.blob.sentiment.polarity if sentence is None else sentence.sentiment.polarity
         friendly_threshold: float = threshold
         hostile_threshold: float = -threshold
 
@@ -49,18 +54,22 @@ class SentimentAnalysis:
             return Mood(emoji='😐😑😒😕', sentiment=sentiment)
 
     def polarity_and_subjectivity(self,) -> str:
-        result: str = ''
+        result: list[tuple[str, str]] = []
         for sentence in self.blob.sentences:
-            result += str(sentence)
             sentiment = round(sentence.sentiment.polarity, 2)
             subjectivity = round(sentence.sentiment.subjectivity, 2)
             color = 'green' if sentiment > 0 else 'red'
-            result += f'\n🔎 :blue[polarity]: :{color}[{sentiment}] 🚥 :orange[subjectivity]: :violet[{subjectivity}] \n\n'
+            mood = self.get_mood(sentence=sentence)
+            analysis = f'\n\n🔎 :blue[polarity]: :{color}[{sentiment}] 🚥 :orange[subjectivity]: :violet[{subjectivity}] \t\t | \t\t {mood.emoji}'
+            result.append((str(sentence), analysis))
         return result
 
     def get_word_count_df(self,) -> pd.DataFrame:
         word_count: defaultdict = self.blob.word_counts
-        return pd.DataFrame(data={'words': word_count.keys(), 'count': word_count.values()})
+        selected_words = set(word_count.keys()) - set(self.english_stopwords)
+        data = {k: v for k, v in word_count.items() if k in selected_words}
+        return pd.DataFrame(data={'words': data.keys(), 'count': data.values()})
+
 
 
 class SpellingCorrection:
